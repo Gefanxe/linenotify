@@ -1,0 +1,29 @@
+{
+  "name": "linenotify",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "form-data": "^3.0.0",
+    "ip": "^1.1.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gefanxe/linenotify.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gefanxe/linenotify/issues"
+  },
+  "homepage": "https://github.com/Gefanxe/linenotify#readme"
+}
