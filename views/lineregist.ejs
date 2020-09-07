@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>On Work Notify Description</title>
+  <script>
+    function formSend(frm) {
+      if (frm.user.value == '' || frm.pass.value == '' || frm.token.value == '') {
+        alert('user, pass, token 都要輸入!');
+      } else {
+        let result = document.getElementById('result');
+        let url = 'http://<%=ipport%>/onjobnotify';
+        let data = {
+          user: frm.user.value,
+          pass: frm.pass.value,
+          token: frm.token.value
+        };
+        fetch(url, {
+          body: JSON.stringify(data),
+          cache: "no-cache",
+          headers: {
+            "content-type": "application/json"
+          },
+          method: "POST"
+        }).then((response) => {
+          return response.json();
+        }).then(function (res) {
+          console.log(res);
+          result.innerHTML = res.info;
+        }).catch((err) => {
+          console.log('錯誤:', err);
+        });
+      }
+      return false;
+    }
+  </script>
+</head>
+
+<body>
+
+  <a href="https://notify-bot.line.me/oauth/authorize?response_type=code&scope=notify&response_mode=form_post&client_id=mkSexYl4zhWBdB7KFcKY9o&redirect_uri=<%=redirect_uri%>&state=happydate"
+    target="_blank" rel="noopener noreferrer">
+    註冊Line Notify
+  </a>
+
+  <hr>
+
+  <h3>測試</h3>
+
+  <form action="" onsubmit="return formSend(this)">
+    user <input type="text" name="user"> <br>
+    pass <input type="password" name="pass"> <br>
+    token <input type="text" name="token" size="55"> <br>
+    <input type="submit" value="send">
+  </form>
+  <div id="result"></div>
+
+</body>
+
+</html>
