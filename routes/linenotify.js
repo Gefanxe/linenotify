@@ -8,7 +8,7 @@ function getAccessToken(code, cb) {
     let formdata = new FormData();
 
     formdata.append('grant_type', 'authorization_code');
-    formdata.append('redirect_uri', 'http://' + ip.address() + ':' + serve_port + '/linenotify/callback');
+    formdata.append('redirect_uri', 'http://' + ip.address() + ':' + serve_port + '/line/callback');
     formdata.append('client_id', 'mkSexYl4zhWBdB7KFcKY9o');
     formdata.append('client_secret', 'XMgX1cRS4tLRwoFqUQxbmVfloNUciui0c4ufkv0zQaG');
     formdata.append('code', code);
@@ -64,7 +64,7 @@ router.get('/line/regist', function (req, res) {
     res.render('lineregist', {
         title: '首頁',
         ipport: ip.address() + ':8999',
-        redirect_uri: 'http://' + ip.address() + ':' + serve_port + '/linenotify/callback'
+        redirect_uri: 'http://' + ip.address() + ':' + serve_port + '/line/callback'
     });
 });
 
