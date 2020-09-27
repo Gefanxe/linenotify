@@ -5,6 +5,8 @@ const app = express();
 const cors = require('cors');
 const ip = require('ip');
 
+const serve_port = 3000;
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -16,6 +18,6 @@ require("fs").readdirSync(require("path").join(__dirname, "routes")).forEach(fun
   app.use('/', require("./routes/" + file));
 });
 
-var server = app.listen(3000, '0.0.0.0', function () {
-  console.log('Server Listening on ' + ip.address() + ':3000');
+const server = app.listen(serve_port, '0.0.0.0', function () {
+  console.log('Server Listening on ' + ip.address() + ':' + serve_port.toString());
 });

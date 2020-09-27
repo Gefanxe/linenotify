@@ -1,16 +1,21 @@
 const express = require('express');
+const axios = require('axios');
+const ip = require('ip');
+const FormData = require('form-data');
 const router = express.Router();
 
-
-
+// TODO: LINE data set to db
+const client_id = 'Gf1nOjPTGZ5bdBT0IyO5QJ';
+const client_secret = 'xl9HcD1FQKyKCqs1U3EK6ggBRLS87qPh4EvUu0t3cmn';
+const redirect_uri = 'http://localhost:3000/line/callback';
 
 function getAccessToken(code, cb) {
     let formdata = new FormData();
 
     formdata.append('grant_type', 'authorization_code');
-    formdata.append('redirect_uri', 'http://' + ip.address() + ':' + serve_port + '/line/callback');
-    formdata.append('client_id', 'mkSexYl4zhWBdB7KFcKY9o');
-    formdata.append('client_secret', 'XMgX1cRS4tLRwoFqUQxbmVfloNUciui0c4ufkv0zQaG');
+    formdata.append('redirect_uri', redirect_uri);
+    formdata.append('client_id', client_id);
+    formdata.append('client_secret', client_secret);
     formdata.append('code', code);
 
     axios.post('https://notify-bot.line.me/oauth/token', formdata, {
@@ -59,12 +64,12 @@ router.post('/line/callback', function (req, res) {
     });
 });
 
-// TODO: redirect_uri 要改
 router.get('/line/regist', function (req, res) {
     res.render('lineregist', {
         title: '首頁',
-        ipport: ip.address() + ':8999',
-        redirect_uri: 'http://' + ip.address() + ':' + serve_port + '/line/callback'
+        client_id: client_id,
+        ipport: ip.address() + ':3000',
+        redirect_uri: redirect_uri
     });
 });
 
