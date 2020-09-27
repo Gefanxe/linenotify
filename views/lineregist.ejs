@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>On Work Notify Description</title>
+  <script src="/js/qrcode.min.js"></script>
   <script>
     function formSend(frm) {
       if (frm.user.value == '' || frm.pass.value == '' || frm.token.value == '') {
@@ -34,6 +35,14 @@
       }
       return false;
     }
+
+    function create_qrcode(text, typeNumber, errorCorrectionLevel, mode, mb) {
+      qrcode.stringToBytes = qrcode.stringToBytesFuncs[mb || 'UTF-8'];
+      var qr = qrcode(typeNumber || 0, errorCorrectionLevel || 'M');
+      qr.addData(text, mode || 'Byte');
+      qr.make();
+      return qr.createImgTag();
+    };
   </script>
 </head>
 
@@ -41,9 +50,10 @@
 
   <a href="https://notify-bot.line.me/oauth/authorize?response_type=code&scope=notify&response_mode=form_post&client_id=<%=client_id%>&redirect_uri=<%=redirect_uri%>&state=happydate"
     target="_blank" rel="noopener noreferrer">
-    註冊Line Notify
+    點我註冊Line Notify
   </a>
-
+  <h3>QrCode</h3>
+  <div id="qr"></div>
   <hr>
 
   <h3>測試</h3>
@@ -56,6 +66,10 @@
   </form>
   <div id="result"></div>
 
+  <hr>
+  <script>
+    document.getElementById('qr').innerHTML = create_qrcode("https://notify-bot.line.me/oauth/authorize?response_type=code&scope=notify&response_mode=form_post&client_id=<%=client_id%>&redirect_uri=<%=redirect_uri%>&state=happydate");
+  </script>
 </body>
 
 </html>
